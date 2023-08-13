@@ -1,14 +1,17 @@
+import ProgressBar from './CircularProgressBar'
 import React, { useState } from 'react';
+import Loader from '../images/loading.gif' 
+import notFound from '../images/404.png'
 
 function Analyze() {
   const [username, setUsername] = useState('');
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
+    setError(false);
     setLoading(true);
 
     try {
@@ -16,7 +19,7 @@ function Analyze() {
       setData(result);
       console.log(result)
     } catch (err) {
-      setError(err.message);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -25,11 +28,11 @@ function Analyze() {
   const handleClear = () => {
     setUsername('');
     setData({});
-    setError(null);
+    setError(false);
   };
 
   const callAPi = async () => {
-    if (username === '') {
+    if (username === '' || data.status === 'error') {
       throw new Error('Username Not Found');
     }
 
@@ -43,7 +46,8 @@ function Analyze() {
     });
 
     if (!response.ok) {
-      throw new Error(`Error! status: ${response.status}`);
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.message || 'An error occurred.');    
     }
 
     return await response.json();
@@ -55,7 +59,7 @@ function Analyze() {
     message = `While ${username} has solved a significant number of easy problems, they may benefit from increasing their exposure to medium and hard problems. These difficulty levels offer more complex and challenging algorithmic scenarios, which can further enhance their problem-solving abilities.`
   }
   else if (data.mediumSolved > data.easySolved && data.mediumSolved > data.hardSolved) {
-    message = `The higher number of solved medium problems (${data.mediumSolved}) indicates that the person is comfortable with problems of moderate complexity. Medium problems often require a good understanding of coding concepts and logic.`
+    message = `The higher number of solved medium problems (${data.mediumSolved}) indicates that ${username} is comfortable with problems of moderate complexity. Medium problems often require a good understanding of coding concepts and logic.`
   }
   else {
     message = `The high number of solved hard problems (${data.hardSolved}) suggests that the person is comfortable tackling complex algorithmic challenges. Hard problems are typically more challenging and require deeper understanding and problem-solving skills.`
@@ -76,38 +80,31 @@ function Analyze() {
           <button className='btn' type="button" onClick={handleClear}>Clear</button>
         </div>
       </form>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-      {data.totalSolved && (
-        <div className='data-display'>
-          <h2>{username}</h2>
-          <p>Total Solved Problems: {(data.totalSolved / data.totalQuestions * 100).toFixed(2)}</p>
-          <p>Easy Problems: {data.easySolved}</p>
-          <p>Medium Problems: {data.mediumSolved}</p>
-          <p>Hard Problems: {data.hardSolved}</p>
-          <p>Acceptance Rate: {data.acceptanceRate}%</p>
-          <p>{message}</p>
-          <div className='data-encloser'>
-            <div className='skills'>
-              <div className='outer'>
-                <div className='inner'>
-                  <div id='totalSolved'>{(data.totalSolved / data.totalQuestions * 100).toFixed(2)}%</div>
-                </div>
-              </div>
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
-                <defs>
-                  <linearGradient id="GradientColor">
-                    <stop offset="0%" stop-color="#7f62c4" />
-                    <stop offset="100%" stop-color="#6d2b8a" />
-                  </linearGradient>
-                </defs>
-                <circle cx="80" cy="80" r="70" stroke-linecap="round" />
-              </svg>
+      {loading && <p><img width='40px' height='40px' src={Loader} alt="loader" /></p>}
+      
+      {error && (
+      <div>
+        {/* <p>Error: {error}</p> */}
+        <img src={notFound} alt="Not Found" />
+      </div>
+      )} 
+      {(!error && data.totalSolved && (
+        <div>
+          <div className='data-display'>
+            <h2>{username}</h2>
+            <p>Total Solved Problems: {data.totalSolved}</p>
+            <div className='problems'>
+              <p>Easy Problems: {data.easySolved}</p>
+              <p>Medium Problems: {data.mediumSolved}</p>
+              <p>Hard Problems: {data.hardSolved}</p>
             </div>
-
+            <ProgressBar className='progressBar' rateValue={data.acceptanceRate}/>
+            <p>Some Observations :</p>
+            <p>{message}</p>
           </div>
         </div>
-      )}
+      ))}
+
     </div>
   );
 }

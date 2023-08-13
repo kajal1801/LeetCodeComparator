@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ProgressBar from './CircularProgressBar'
 
 function Compare() {
     const [username1, setUsername1] = useState('');
@@ -10,6 +11,10 @@ function Compare() {
     const [error1, setError1] = useState(null);
     const [error2, setError2] = useState(null);
 
+    const handleSubmit = (e) => {
+        handleSubmit1(e)
+        handleSubmit2(e)
+    }
     const handleSubmit1 = async (e) => {
         e.preventDefault();
         setError1(null);
@@ -86,19 +91,8 @@ function Compare() {
                             value={username1}
                             onChange={(e) => setUsername1(e.target.value)}
                         />
-                        <div>
-                            <button className='btn' onClick={handleSubmit1}>Submit</button>
-                            <button className='btn' type="button" onClick={() => handleClear(username1)}>Clear</button>
-                        </div>
                     </form>
-                    {loading1 && <p>Loading...</p>}
-                    {error1 && <p>Error: {error1}</p>}
-                    {data1.totalSolved && (
-                        <div>
-                            <h2>{username1}</h2>
-                            <p>Total Solved: {data1.totalSolved}</p>
-                        </div>
-                    )}
+
                 </div>
 
                 <div className='forms'>
@@ -110,18 +104,45 @@ function Compare() {
                             value={username2}
                             onChange={(e) => setUsername2(e.target.value)}
                         />
-                        <div>
-                            <button className='btn' onClick={handleSubmit2}>Submit</button>
-                            <button className='btn' type="button" onClick={() => handleClear(username2)}>Clear</button>
-                        </div>
                     </form>
+
+                </div>
+            </div>
+            <div>
+                <button className='btn' onClick={handleSubmit}>Submit</button>
+                <button className='btn' type="button" onClick={() => handleClear(username2)}>Clear</button>
+            </div>
+            <div class='compare-data'>
+                <div>
+                    {loading1 && <p>Loading...</p>}
+                    {error1 && <p>Error: {error1}</p>}
+                    {data1.totalSolved && (
+                        <div className='data-display'>
+                        <h2>{username1}</h2>
+                        <p>Total Solved Problems: {data1.totalSolved}</p>
+                        <div className='problems'>
+                          <p>Easy Problems: {data1.easySolved}</p>
+                          <p>Medium Problems: {data1.mediumSolved}</p>
+                          <p>Hard Problems: {data1.hardSolved}</p>
+                        </div>
+                        <ProgressBar className='progressBar' rateValue={data1.acceptanceRate}/>
+                      </div>
+                    )}
+                </div>
+                <div>
                     {loading2 && <p>Loading...</p>}
                     {error2 && <p>Error: {error2}</p>}
                     {data2.totalSolved && (
-                        <div>
-                            <h2>{username2}</h2>
-                            <p>Total Solved: {data2.totalSolved}</p>
+                        <div className='data-display'>
+                        <h2>{username2}</h2>
+                        <p>Total Solved Problems: {data2.totalSolved}</p>
+                        <div className='problems'>
+                          <p>Easy Problems: {data2.easySolved}</p>
+                          <p>Medium Problems: {data2.mediumSolved}</p>
+                          <p>Hard Problems: {data2.hardSolved}</p>
                         </div>
+                        <ProgressBar className='progressBar' rateValue={data2.acceptanceRate}/>
+                      </div>
                     )}
                 </div>
             </div>
