@@ -1,74 +1,54 @@
-# Getting Started with Create React App
+# Leetcode Comparator Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Leetcode Comparator is a web application built using React.js that allows users to analyze and compare LeetCode profiles. Whether you want to evaluate your own progress or compare your solutions with another user, this app provides an intuitive interface to achieve these goals. The app leverages the power of React.js along with CSS to deliver a seamless and visually appealing experience.
 
-# Web App Link
+## Web App Link
 
 Try out this web app now: [https://leetcode-comparator.netlify.app/](https://leetcode-comparator.netlify.app/)
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- <b>User Profile Analysis</b>: Get detailed insights into your LeetCode profile.
 
-### `npm start`
+- <b>User Comparison</b>: Compare your LeetCode profile side by side with another user's profile. Identify strengths, weaknesses, and track progress.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- <b>Responsive Design</b>: Enjoy a consistent experience across various devices, thanks to the responsive design that adapts to different screen sizes.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stacks
 
-### `npm test`
+The Leetcode Comparator web app is built using the following technologies:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React.js
+- JavaScript
+- CSS
+- HTML
 
-### `npm run build`
+## Installation and Usage
+Follow these steps to set up and run the Leetcode Comparator web app on your local machine:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- <b>Clone the Repository</b>: Clone this repository to your local machine using git clone [https://github.com/kajal1801/LeetCodeComparator](https://github.com/kajal1801/LeetCodeComparator).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- <b>Navigate to Directory</b>: Use the `cd leetcode-comparator` command to navigate into the project directory.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- <b>Install Dependencies</b>: Run `npm install` to install the required dependencies for the app.
 
-### `npm run eject`
+- <b>Start the App</b>: Execute `npm start` to start the development server. The app should automatically open in your default web browser at [http://localhost:3000](http://localhost:3000).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- <b>Usage</b>: Use the app to analyze your LeetCode profile or compare it with another user's profile. Input the usernames and explore the provided insights.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contributing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Contributions are welcome and encouraged! If you want to contribute to the Leetcode Comparator web app, follow these steps:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Fork the repository.
 
-## Learn More
+- Create a new branch for your feature or bug fix: git checkout -b feature-name.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Make your changes and commit them with descriptive commit messages.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Push your changes to your forked repository.
 
-### Code Splitting
+- Create a pull request to the original repository's main branch.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Acknowledgments
+This project is inspired by the need for a user-friendly tool to analyze and compare LeetCode profiles. Thanks to the React.js community for providing the foundation for building this app.
