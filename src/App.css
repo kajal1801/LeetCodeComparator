@@ -13,6 +13,10 @@ body{
   /* min-height: 100vh; */
 }
 
+p{
+  margin: 1.5rem;
+}
+
 .App {
   text-align: center;
   display: flex;
@@ -89,26 +93,58 @@ form .btn {
 }
 
 .data-display{
-  max-width: 500px;
+  max-width: 700px;
   margin: 0 auto;
   text-align: left;
   margin-bottom: 30px;
 }
 
-.data-display h2{
+.data-display h2 {
   text-align: center;
+  font-size: 1.5rem;
+  font-weight: 480;
+  margin: 1rem;
 }
 
-.problems {
+.data-display h3{
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 1rem;
+}
+
+.problems,
+.compare-problems {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.problems p,
+.compare-problems p{
+  margin: 0.75rem;
+}
+
+.progressBar{
+  margin: 2rem;
 }
 
 .compare-data{
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
+.message {
+  margin: 2rem;
+  font-weight: 300;
+  font-size: 1rem;
+}
 .footer {
   width: 100%;
   height: 40px;
@@ -120,5 +156,17 @@ form .btn {
 @media screen and (max-width: 450px) {
   .compare-div{
     display: block;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .problems {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 1200px){
+  .compare-problems{
+    flex-direction: column;
   }
 }
