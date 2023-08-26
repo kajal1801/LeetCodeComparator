@@ -1,4 +1,4 @@
-# Leetcode Comparator Web App
+# Leetcode Comparator
 
 The Leetcode Comparator is a web application built using React.js that allows users to analyze and compare LeetCode profiles. Whether you want to evaluate your own progress or compare your solutions with another user, this app provides an intuitive interface to achieve these goals. The app leverages the power of React.js along with CSS to deliver a seamless and visually appealing experience.
 

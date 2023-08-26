@@ -5,7 +5,7 @@ function Header(){
     return (
       <header>
         <img id='logo' src={logo} alt='Logo of the Website'/>
-        <h1>LeetCode DuoStats</h1>
+        <h1>LeetCode Comparator</h1>
       </header>
     );
   }
