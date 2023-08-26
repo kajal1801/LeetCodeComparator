@@ -26,7 +26,7 @@ The Leetcode Comparator web app is built using the following technologies:
 ## Installation and Usage
 Follow these steps to set up and run the Leetcode Comparator web app on your local machine:
 
-- <b>Clone the Repository</b>: Clone this repository to your local machine using git clone [https://github.com/kajal1801/LeetCodeComparator](https://github.com/kajal1801/LeetCodeComparator).
+- <b>Clone the Repository</b>: Clone this repository to your local machine using `git clone https://github.com/kajal1801/LeetCodeComparator`.
 
 - <b>Navigate to Directory</b>: Use the `cd leetcode-comparator` command to navigate into the project directory.
 
