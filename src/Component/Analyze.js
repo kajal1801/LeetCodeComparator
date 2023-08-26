@@ -1,6 +1,6 @@
 import ProgressBar from './CircularProgressBar'
 import React, { useState } from 'react';
-import Loader from '../images/loading.gif' 
+import Loader from '../images/loading.gif'
 import notFound from '../images/404.png'
 
 function Analyze() {
@@ -16,6 +16,9 @@ function Analyze() {
 
     try {
       const result = await callAPi();
+      if (result.status === 'error') {
+        throw new Error('Username Not Found')
+      }
       setData(result);
       console.log(result)
     } catch (err) {
@@ -47,7 +50,7 @@ function Analyze() {
 
     if (!response.ok) {
       const errorResponse = await response.json();
-      throw new Error(errorResponse.message || 'An error occurred.');    
+      throw new Error(errorResponse.message || 'An error occurred.');
     }
 
     return await response.json();
@@ -81,26 +84,24 @@ function Analyze() {
         </div>
       </form>
       {loading && <p><img width='40px' height='40px' src={Loader} alt="loader" /></p>}
-      
+
       {error && (
-      <div>
-        {/* <p>Error: {error}</p> */}
-        <img src={notFound} alt="Not Found" />
-      </div>
-      )} 
+        <div>
+          {/* <p>Error: {error}</p> */}
+          <img src={notFound} alt="Not Found" />
+        </div>
+      )}
       {(!error && data.totalSolved && (
         <div>
           <div className='data-display'>
-            <h2>{username}</h2>
-            <p>Total Solved Problems: {data.totalSolved}</p>
+            <h3>Total Solved Problems: {data.totalSolved}</h3>
             <div className='problems'>
               <p>Easy Problems: {data.easySolved}</p>
               <p>Medium Problems: {data.mediumSolved}</p>
               <p>Hard Problems: {data.hardSolved}</p>
             </div>
-            <ProgressBar className='progressBar' rateValue={data.acceptanceRate}/>
-            <p>Some Observations :</p>
-            <p>{message}</p>
+            <ProgressBar className='progressBar' rateValue={data.acceptanceRate} />
+            <p className='message'>Some Observations : <br /> {message}</p>
           </div>
         </div>
       ))}

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import ProgressBar from './CircularProgressBar'
+import Loader from '../images/loading.gif'
+import notFound from '../images/404.png'
 
 function Compare() {
     const [username1, setUsername1] = useState('');
@@ -15,6 +17,7 @@ function Compare() {
         handleSubmit1(e)
         handleSubmit2(e)
     }
+
     const handleSubmit1 = async (e) => {
         e.preventDefault();
         setError1(null);
@@ -22,6 +25,9 @@ function Compare() {
 
         try {
             const result = await callAPi(username1);
+            if(result.status === 'error'){
+                throw new Error('Username Not Found')
+            }
             setData1(result);
         } catch (err) {
             setError1(err.message);
@@ -37,6 +43,10 @@ function Compare() {
 
         try {
             const result = await callAPi(username2);
+            console.log(result)
+            if(result.status === 'error'){
+                throw new Error('Username Not Found')
+            }
             setData2(result);
         } catch (err) {
             setError2(err.message);
@@ -45,17 +55,14 @@ function Compare() {
         }
     };
 
-    const handleClear = (username) => {
-        if (username === username1) {
-            setUsername1('');
-            setData1({});
-            setError1(null);
-        }
-        else {
-            setUsername2('');
-            setData2({});
-            setError2(null);
-        }
+    const handleClear = () => {
+        setUsername1('');
+        setData1({});
+        setError1(null);
+
+        setUsername2('');
+        setData2({});
+        setError2(null);
     };
 
     const callAPi = async (username) => {
@@ -73,7 +80,7 @@ function Compare() {
         });
 
         if (!response.ok) {
-            throw new Error(`Error! status: ${response.status}`);
+            throw new Error(`Username Not Found`);
         }
 
         return await response.json();
@@ -110,39 +117,49 @@ function Compare() {
             </div>
             <div>
                 <button className='btn' onClick={handleSubmit}>Submit</button>
-                <button className='btn' type="button" onClick={() => handleClear(username2)}>Clear</button>
+                <button className='btn' type="button" onClick={() => handleClear()}>Clear</button>
             </div>
             <div class='compare-data'>
                 <div>
-                    {loading1 && <p>Loading...</p>}
-                    {error1 && <p>Error: {error1}</p>}
+                    {loading1 && <p><img width='40px' height='40px' src={Loader} alt="loader" /></p>}
+                    {error1 && (
+                        <div>
+                            {/* <p>Error: {error}</p> */}
+                            <img src={notFound} alt="Not Found" />
+                        </div>
+                    )}
                     {data1.totalSolved && (
                         <div className='data-display'>
-                        <h2>{username1}</h2>
-                        <p>Total Solved Problems: {data1.totalSolved}</p>
-                        <div className='problems'>
-                          <p>Easy Problems: {data1.easySolved}</p>
-                          <p>Medium Problems: {data1.mediumSolved}</p>
-                          <p>Hard Problems: {data1.hardSolved}</p>
+                            <h2>{username1}</h2>
+                            <h3>Total Solved Problems: {data1.totalSolved}</h3>
+                            <div className='compare-problems'>
+                                <p>Easy Problems: {data1.easySolved}</p>
+                                <p>Medium Problems: {data1.mediumSolved}</p>
+                                <p>Hard Problems: {data1.hardSolved}</p>
+                            </div>
+                            <ProgressBar className='progressBar' rateValue={data1.acceptanceRate} />
                         </div>
-                        <ProgressBar className='progressBar' rateValue={data1.acceptanceRate}/>
-                      </div>
                     )}
                 </div>
                 <div>
-                    {loading2 && <p>Loading...</p>}
-                    {error2 && <p>Error: {error2}</p>}
+                    {loading2 && <p><img width='40px' height='40px' src={Loader} alt="loader" /></p>}
+                    {error2 && (
+                        <div>
+                            {/* <p>Error: {error}</p> */}
+                            <img src={notFound} alt="Not Found" />
+                        </div>
+                    )}
                     {data2.totalSolved && (
                         <div className='data-display'>
-                        <h2>{username2}</h2>
-                        <p>Total Solved Problems: {data2.totalSolved}</p>
-                        <div className='problems'>
-                          <p>Easy Problems: {data2.easySolved}</p>
-                          <p>Medium Problems: {data2.mediumSolved}</p>
-                          <p>Hard Problems: {data2.hardSolved}</p>
+                            <h2>{username2}</h2>
+                            <h3>Total Solved Problems: {data2.totalSolved}</h3>
+                            <div className='compare-problems'>
+                                <p>Easy Problems: {data2.easySolved}</p>
+                                <p>Medium Problems: {data2.mediumSolved}</p>
+                                <p>Hard Problems: {data2.hardSolved}</p>
+                            </div>
+                            <ProgressBar className='progressBar' rateValue={data2.acceptanceRate} />
                         </div>
-                        <ProgressBar className='progressBar' rateValue={data2.acceptanceRate}/>
-                      </div>
                     )}
                 </div>
             </div>
